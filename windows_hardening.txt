@@ -1,0 +1,28 @@
+Windows 8 and Windows 10 hardening
+
+1. Windows firewall, white listing
+2. AppLocker for  (preferably with cert based limits, dll based makes the system too slow)
+3. Disable powershell for standard users
+4. EMET for antiexploitation (take time to configure!)
+5. Install applications with different users, application separation
+6. Do not install applications with elevated privileges
+7. No antivirus or similar "security product", as their low quality program
+poses higher risk for experienced users. For standard users, it may worth
+thinking about it.
+8. If you use the computer for browsing, make sure the browser is hardened
+(eg. NoScript, Request Policy..etc)
+
+
+References
+  AppLocker https://technet.microsoft.com/en-us/library/dd759117.aspx
+  EMET https://microsoft.com/emet/
+  Browser "security" https://securityinabox.org/en/guide/firefox/windows
+
+Why AVs often pose higher risks:
+ESET Nod32 Exploit: https://www.exploit-db.com/exploits/12529/
+Avast Command Execution: https://code.google.com/p/google-security-research/issues/detail?id=546
+Malwarebytes Remote Code Exec: https://www.rapid7.com/db/modules/exploit/windows/browser/malwarebytes_update_exec
+Malwarebytes DoS: https://www.exploit-db.com/exploits/35842/
+McAfee with poorly written auth: https://github.com/tfairane/HackStory/blob/master/McAfeePrivesc.md
+
+...and so on!

@@ -1,0 +1,87 @@
+Debian hardening (Wheezy, Jessie, Ubuntu)
+
+=====
+Standard settings and config
+
+- While installing, set up LVM with LUKS encryotion (if you have, TPM can be used so no manual password input is needed, alternatively it can be managed centrally with bash scripting)
+
+- Recommended mount options:
+    /home     rw,nodev,nosuid,rw,nouse,noexec
+    /tmp      rw,nodev,noexec,nouser,nosuid
+    /var/tmp  rw,nodev,noexec,nouser,nosuid
+    /var      rw,nodev,noexec,nouser,nosuid
+
+- Configure auto update to run everyday (on Debian "unattended-upgrades", on Ubuntu you can do it with Software Center settings)
+    https://wiki.debian.org/UnattendedUpgrades
+
+- Setup auditd. In enterprise environment, it's recommended to setup syslog-ng and log remotely. Example audit.rules for EXEC logs:
+    -a exit,always -F arch=b64 -F euid=0 -S execve
+    -a exit,always -F arch=b32 -F euid=0 -S execve
+
+- Remove unnecessary programs (eg. avahi-daemon and rpcbind)
+    netstat -tulnp  # Check listening apps and if not needed remove them
+    apt-get remove avahi-daemon dnsmasq  # "remove" will keep config files, purge deletes everythin!
+
+- Disable USB Mass Storages if you don't need them
+    echo "blacklist usb-storage" | tee -a /etc/modprobe.d/blacklist.conf
+    update-initramfs -u
+
+- Hide processes that the user don't need to see
+    proc    /proc    proc    defaults,hidepid=2  0  0
+
+- Use grsec/pax or enable apparmor, enforce the default applications and browsers. Please refer to the Debian and Ubuntu documentations.
+    https://grsecurity.net/
+    https://wiki.debian.org/AppArmor/HowToUse
+    https://help.ubuntu.com/12.04/serverguide/apparmor.html
+
+
+=====
+Kernel
+
+- Disable dmesg for standard users
+    echo kernel.dmesg_restrict = 1 >> /etc/sysctl.conf
+
+
+=====
+Firewall
+
+- Disable IPv6
+    echo 'blacklist ipv6' >> /etc/modprobe.d/blacklist
+    echo net.ipv6.conf.all.disable_ipv6=1 > /etc/sysctl.d/disableipv6.conf
+    echo "1" > /proc/sys/net/ipv6/conf/all/disable_ipv6
+    echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+
+- Configure firewall to DROP everything by default and allow only manadotory ports.
+
+
+=====
+Remote management
+
+- For enterprise, configure central management (eg. puppy, cf-engine or similar), that makes sure all users have the same config.
+
+- SSH for remote management if needed, example settings:
+    Port 1234
+    ListenAddress 0.0.0.0
+    PermitRootLogin without-password  # Use keys!
+    PermitEmptyPasswords no
+    PasswordAuthentication no  # Generate your SSH key with a password!
+    AllowUsers user1 user2  # No other users will be allowed
+    X11Forwarding no
+    PermitTunnel no
+    GatewayPorts no  # Note that it won't allow port forawrding!
+
+
+=====
+Browser basics
+
+- Use the following extenstions for FireFox:
+NoScript
+HTTPS Everywhere
+Privacy Badger
+
+
+- Use the following extenstions for Chromium:
+ScriptBlock
+HTTPS Everywhere
+Privacy Badger
+
