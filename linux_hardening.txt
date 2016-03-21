@@ -51,9 +51,15 @@ Firewall
     echo "1" > /proc/sys/net/ipv6/conf/all/disable_ipv6
     echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 
-- Configure firewall to DROP everything by default and allow only manadotory ports.
-
-
+- Configure firewall to DROP everything by default and allow only manadotory connections. Example below for IPv4.
+    IPT=/sbin/iptables
+    $IPT -F
+    $IPT -P OUTPUT ACCEPT
+    $IPT -P INPUT DROP
+    $IPT -P FORWARD DROP
+    $IPT -A INPUT --in-interface lo -j ACCEPT  # Allow loopback / localhost 
+    $IPT -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT  # Allow response packets
+    
 =====
 Remote management
 
