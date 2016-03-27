@@ -1,3 +1,6 @@
+# Setting up grsec
+# License: GNU Free Documentation License - Version 1.3, 3 November 2008 (for details, see LICENSE.txt)
+
 # Preparation
 # https://en.wikibooks.org/wiki/Grsecurity/Obtaining_grsecurity
 
