@@ -31,3 +31,5 @@ sc stop dmwappushservice
 sc delete DiagTrack
 sc delete dmwappushservice
 
+
+# Or Windows behind a firewall and block Microsoft...

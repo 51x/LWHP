@@ -1,8 +1,16 @@
-Debian hardening (Wheezy, Jessie, Ubuntu)
+Linux Hardening Points and ideas
 License: GNU Free Documentation License - Version 1.3, 3 November 2008 (for details, see LICENSE.txt)
 
 =====
-Standard settings and config
+Gentoo hardening points
+
+Gentoo + musl + openrc or runit + luks + zfs + grsec
+
+Plus CACert and repobuilds.
+
+
+=====
+Debian hardening (Wheezy, Jessie, Ubuntu) - Standard settings and config
 
 - While installing, set up LVM with LUKS encryotion (if you have, TPM can be used so no manual password input is needed, alternatively it can be managed centrally with bash scripting)
 
@@ -92,3 +100,6 @@ ScriptBlock
 HTTPS Everywhere
 Privacy Badger
 
+You can also use privoxy in the place of Privacy Badger: https://www.privoxy.org/
+
+Know that allowing javascript exposes you to hardcore tracking (eg. javascript audio API fingerprinting which is used by several big sites).
