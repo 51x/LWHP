@@ -1,5 +1,7 @@
 # The list is unfortunately not full. If you really don't want Microsoft track you, stop using their software - use Linux.
 
+# Alternatively try these and use a good firewall, don't allow unwanted sites.
+
 # Uninstall tracking updates:
 wusa /uninstall /kb:3083710 /quiet /norestart
 wusa /uninstall /kb:3083711 /quiet /norestart

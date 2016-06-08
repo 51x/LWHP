@@ -8,14 +8,14 @@ echo "Check script and the comments before running!"
 sleep 9999
 
 
-GRSEC="grsecurity-3.1-4.4.6-201603221748.patch"
-GRSEC_SIGN="grsecurity-3.1-4.4.6-201603221748.patch.sig"
+GRSEC="grsecurity-3.1-4.5.7-201606080852.patch"
+GRSEC_SIGN="grsecurity-3.1-4.5.7-201606080852.patch.sig"
 
 GRADM="gradm-3.1-201603152148.tar.gz"
 GRADM_SIGN="gradm-3.1-201603152148.tar.gz.sig"
 
-KERNEL="linux-4.4.6.tar.gz"
-KERNEL_SIGN="linux-4.4.6.tar.sign"
+KERNEL="linux-4.5.7.tar.gz"
+KERNEL_SIGN="linux-4.5.7.tar.sign"
 
 # Create and use an empty folder for transparency.
 mkdir grsec_compile
@@ -33,13 +33,14 @@ wget http://grsecurity.net/stable/$GRADM_SIGN
 wget https://www.kernel.org/pub/linux/kernel/v4.x/$KERNEL
 wget https://www.kernel.org/pub/linux/kernel/v4.x/$KERNEL_SIGN
 
-
 # Check the signatures (use tab for full filename)
 gpg --verify $GRSEC_SIGN
 gpg --verify $GRADM_SIGN
 gunzip $KERNEL
 gpg --verify $KERNEL_SIGN
 
+echo "Downloads and verifications finished."
+sleep 5
 
 # Configure and make kernel
 # https://en.wikibooks.org/wiki/Grsecurity/Configuring_and_Installing_grsecurity
@@ -68,8 +69,12 @@ fakeroot make deb-pkg -j 3  # Assuming you want to compile with 2 cores. If you 
 cd ..
 tar xzf $GRADM
 cd gradm
+
+echo "Now you can run the make command."
+
 # make  # with non-root user or use the next command to make it work. 
-make nopam  # without pam support
-make install
+#make nopam  # without pam support
+
+#make install
 
 # In case of problem with shutdown subject: just comment the line out in rbac config. At least that worked last time.
