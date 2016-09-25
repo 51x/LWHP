@@ -7,14 +7,15 @@ Windows 8 and Windows 10 hardening
 0.0 Install the system offline and make the possible setting offline, starting with the firewall.
 0.1 Turn off "Automatic Proxy" settings. It allows WPAD and your NTLM hashes can get stolen easily (eg. responder.py).
 
-1. Windows firewall, white listing of applications allowed to communicate out
-2. AppLocker configuration, preferably with cert based limits - dll based makes the system too slow.
-3. Disable powershell for standard users with applocker. You can also try the powershell restrictions, but these are easy to bypass.
-4. EMET for antiexploitation (take time to configure the applications, don't just use the default ones).
-5. Install applications with different users for application separation.
-6. Do not install applications with elevated privileges.
-7. No antivirus or similar "security product" for experienced users - these often pose higher risks, list below. For standard users, it may worth thinking about it.
-8. If you use the computer for browsing, make sure the browser is hardened (eg. NoScript, Request Policy..etc)
+1. Windows firewall, white listing of applications allowed to communicate out.
+2. Disable not needed services. Note: make sure BITS works or you won't be able to update Windows.
+3. AppLocker configuration, preferably with cert based limits - dll based makes the system too slow.
+4. Disable powershell for standard users with applocker. You can also try the powershell restrictions, but these are easy to bypass.
+5. EMET for antiexploitation (take time to configure the applications, don't just use the default ones).
+6. Install applications with different users for application separation.
+7. Do not install applications with elevated privileges.
+8. No antivirus or similar "security product" for experienced users - these often pose higher risks, list below. For standard users, it may worth thinking about it.
+9. If you use the computer for browsing, make sure the browser is hardened (eg. NoScript, Request Policy..etc)
 
 
 =====
