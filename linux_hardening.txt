@@ -15,10 +15,11 @@ Debian hardening (Wheezy, Jessie, Ubuntu) - Standard settings and config
 - While installing, set up LVM with LUKS encryotion (if you have, TPM can be used so no manual password input is needed, alternatively it can be managed centrally with bash scripting)
 
 - Recommended mount options:
-    /home     rw,nodev,nosuid,rw,nouse,noexec
+    /home     rw,nodev,nouser,noexec,nosuid
     /tmp      rw,nodev,noexec,nouser,nosuid
     /var/tmp  rw,nodev,noexec,nouser,nosuid
-    /var      rw,nodev,noexec,nouser,nosuid
+    /var      rw,nodev,nouser,nosuid
+    # /var could be noexec too, but it would break apt that way.
 
 - Configure auto update to run everyday (on Debian "unattended-upgrades", on Ubuntu you can do it with Software Center settings)
     https://wiki.debian.org/UnattendedUpgrades
