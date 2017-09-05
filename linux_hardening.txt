@@ -1,11 +1,11 @@
 Linux Hardening Points and ideas
 License: GNU Free Documentation License - Version 1.3, 3 November 2008 (for details, see LICENSE.txt)
 
+
 =====
 Gentoo hardening points
 
-Gentoo + musl + openrc or runit + luks (or zfs native enc) + zfs + grsec or apparmor
-
+Gentoo + musl + openrc or runit + luks (or zfs native enc) + zfs + apparmor or selinux
 Plus CACert and repobuilds.
 
 
@@ -48,8 +48,12 @@ Debian hardening (Wheezy, Jessie, Ubuntu) - Standard settings and config
 =====
 Kernel
 
-- Disable dmesg for standard users
-    echo kernel.dmesg_restrict = 1 >> /etc/sysctl.conf
+- If you are compiling the kernel you may want ideas from:
+    https://kernsec.org/wiki/index.php/Kernel_Self_Protection_Project/Recommended_Settings
+
+- Sysctl hardening options
+    echo '''kernel.dmesg_restrict=1\nkernel.kptr_restrict=1\nkernel.kexec_load_disabled=1\nkernel.yama.ptrace_scope=1\nuser.max_user_namespaces=0''' >> /etc/sysctl.conf
+
 
 
 =====
