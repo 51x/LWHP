@@ -34,6 +34,7 @@ Debian hardening points for workstations
    apt-get update
    apt-get install apparmor apparmor-profiles apparmor-utils apparmor-profiles-extra apparmor-easyprof -y
    sed -i -e 's/GRUB_CMDLINE_LINUX_DEFAULT="/&security=apparmor /' /etc/default/grub
+   sed -e 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=1/' /etc/default/grub
    update-grub
 
 - Setup auditd if you'd like. You can also send the logs to remote syslog-ng. Example audit.rules for EXEC logs:
